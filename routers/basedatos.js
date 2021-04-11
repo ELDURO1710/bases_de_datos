@@ -2,7 +2,6 @@ const { Client } = require('pg');
 const Router = require('express-promise-router');
 var keys = require('../confi/keys')
 
-
 const client = new Client({
   connectionString: keys.postgresurl,
   ssl: {
@@ -24,16 +23,15 @@ router.post('/insertarpacientes', async (req, res) => {
   res.send('INSERTADO');
 });
 
-router.post('/borrarpacientes', async (req, res) => {
-  const { numid } = req.body.id;
+router.delete(`/borrarpacientes/`, async (req, res) => {
+  console.log(req.body)
   await client.query(
-    `DELETE FROM pacientes WHERE numid=${numid}`
+    `DELETE FROM pacientes WHERE numid=${id}`
   );
   res.send('ELIMINADO');
 });
 
-router.post('/consultatotalpacientes', async (req, res) => {
-  const { id } = req.body
+router.get(`/consultatotalpacientes/${id}`, async (req, res) => {
   const { rows } = await client.query(
     `SELECT * FROM pacientes WHERE numid =${id}`
     )
@@ -44,10 +42,10 @@ router.post('/consultatotalpacientes', async (req, res) => {
   }
 });
 
-router.post('/actualizarpacientes', async (req, res) => {
+router.put('/actualizarpacientes', async (req, res) => {
   const { nombre, apellido, numid } = req.body;
   await client.query(
-    `UPDATE pacientes SET numid='${numid}',nombre='${nombre}',apellidos='${apellido}') WHERE numid =${numid}`
+    `UPDATE pacientes SET numid='${numid}',nombre='${nombre}',apellidos='${apellido}') WHERE numid =${numid};`
   );
   res.send('ACTUALIZADO');
 });

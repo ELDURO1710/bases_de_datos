@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 import axios from 'axios'
 export const Registroinfo = () => {
-
+  const urlbase = `localhost:5000`;
   const [documento, setDocumento] = useState('')
   const [nombre, setNombre] = useState('')
   const [apellido, setApellido] = useState('')
@@ -18,8 +18,8 @@ export const Registroinfo = () => {
 
       }
 
-    const borrardebase = async () => {
-        const res = await axios.post('/basedatos/borrarpacientes', { numid: documento, nombre, apellido });
+    const borrardebase = async (id) => {
+        const res = await axios.post(`${urlbase}/basedatos/borrarpacientes`, {numid:id});
         console.log(res.data)
         setDocumento('')
         setNombre('')
@@ -64,9 +64,9 @@ export const Registroinfo = () => {
          guardabase()
       }
 
-      const borrar = () => {
+      const borrar = (id) => {
         console.log('Se hizo click para borrar');
-         borrardebase()
+         borrardebase(id)
       }
 
       const consultar = () => {
@@ -125,7 +125,7 @@ export const Registroinfo = () => {
                 <button
                 className="btn btn-primary" 
                 type="button"
-                onClick={()=>borrar()}
+                onClick={()=>borrar(documento)}
                 > 
                 borrar
                 </button>
