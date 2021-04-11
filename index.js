@@ -15,21 +15,21 @@ const mountRoutes = require('./routers');
 
 mountRoutes(app);
 
-app.get('/consultar', (req, res) => {
+app.get('/consultatotalpacientes', (req, res) => {
   res.send(pacientes);
 });
 
-app.put('/guardar', (req, res) => {
+app.put('/insertarpacientes', (req, res) => {
   adicionapaciente(req.body);
   res.send('GUARDADO OK !!!');
 });
 
-app.delete('/borrar', (req, res) => {
+app.delete('/borrarpacientes', (req, res) => {
   borrapaciente(req.body.id);
   res.send('BORRADO OK !!!');
 });
 
-app.post('/actualizadatos', (req, res) => {
+app.post('/actualizarpacientes', (req, res) => {
   actualizapaciente(req.body);
   res.send('ACTUALIZADO OK !!!');
 });

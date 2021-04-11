@@ -17,6 +17,33 @@ export const Registroinfo = () => {
         setApellido('')
 
       }
+
+    const borrardebase = async () => {
+        const res = await axios.post('/basedatos/borrarpacientes', { numid: documento, nombre, apellido });
+        console.log(res.data)
+        setDocumento('')
+        setNombre('')
+        setApellido('')
+
+      }
+
+    const consultarbase = async () => {
+        const res = await axios.post('/basedatos/consultatotalpacientes', { numid: documento });
+        console.log(res.data)
+        setDocumento('')
+        setNombre('')
+        setApellido('')
+
+      }
+
+    const actualizarbase = async () => {
+        const res = await axios.post('/basedatos/actualizarpacientes', { numid: documento, nombre, apellido });
+        console.log(res.data)
+        setDocumento('')
+        setNombre('')
+        setApellido('')
+
+      }
     
       const onChangedc = (e) => {
         setDocumento(e.currentTarget.value);
@@ -32,9 +59,24 @@ export const Registroinfo = () => {
         setApellido(e.currentTarget.value)
       }
 
-    const inserta = () => {
-        console.log('Se hizo click');
+      const inserta = () => {
+        console.log('Se hizo click para insertar');
          guardabase()
+      }
+
+      const borrar = () => {
+        console.log('Se hizo click para borrar');
+         borrardebase()
+      }
+
+      const consultar = () => {
+        console.log('Se hizo click para consultar');
+         consultarbase()
+      }
+
+      const actualizar = () => {
+        console.log('Se hizo click para actualizar');
+         actualizarbase()
       }
     return (
         <div  className="formdb__box-containter">
@@ -78,6 +120,30 @@ export const Registroinfo = () => {
                 onClick={()=>inserta()}
                 > 
                 enviar info
+                </button>
+
+                <button
+                className="btn btn-primary" 
+                type="button"
+                onClick={()=>borrar()}
+                > 
+                borrar
+                </button>
+
+                <button
+                className="btn btn-primary" 
+                type="button"
+                onClick={()=>consultar()}
+                > 
+                consultar id
+                </button>
+
+                <button
+                className="btn btn-primary" 
+                type="button"
+                onClick={()=>actualizar()}
+                > 
+                actualizar datos
                 </button>    
             </form>
         </div>
