@@ -23,20 +23,20 @@ router.post('/insertarpacientes', async (req, res) => {
   res.send('INSERTADO');
 });
 
-router.delete(`/borrarpacientes/`, async (req, res) => {
+router.delete(`/borrarpacientes/:id`, async (req, res) => {
   console.log(req.body)
   await client.query(
-    `DELETE FROM pacientes WHERE numid=${id}`
+    `DELETE FROM pacientes WHERE numid='${req.params.id}'`
   );
   res.send('ELIMINADO');
 });
 
-router.get(`/consultatotalpacientes/${id}`, async (req, res) => {
+router.get(`/consultatotalpacientes/:id`, async (req, res) => {
   const { rows } = await client.query(
-    `SELECT * FROM pacientes WHERE numid =${id}`
+    `SELECT * FROM pacientes WHERE numid ='${req.params.id}'`
     )
-  if (rows == NULL){
-    res.send('no se encontró a ',id,' en nuestra base de datos');
+  if (!rows){
+    res.send('no se encontró a ',req.params.id,' en nuestra base de datos');
   } else {
     res.send(rows);
   }
@@ -45,7 +45,7 @@ router.get(`/consultatotalpacientes/${id}`, async (req, res) => {
 router.put('/actualizarpacientes', async (req, res) => {
   const { nombre, apellido, numid } = req.body;
   await client.query(
-    `UPDATE pacientes SET numid='${numid}',nombre='${nombre}',apellidos='${apellido}') WHERE numid =${numid};`
+    `UPDATE pacientes SET nombre='${nombre}',apellidos='${apellido}' WHERE numid ='${numid}';`
   );
   res.send('ACTUALIZADO');
 });

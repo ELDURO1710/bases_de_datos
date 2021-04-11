@@ -19,7 +19,7 @@ export const Registroinfo = () => {
       }
 
     const borrardebase = async (id) => {
-        const res = await axios.post(`${urlbase}/basedatos/borrarpacientes`, {numid:id});
+        const res = await axios.delete(`basedatos/borrarpacientes/${id}`);
         console.log(res.data)
         setDocumento('')
         setNombre('')
@@ -27,17 +27,17 @@ export const Registroinfo = () => {
 
       }
 
-    const consultarbase = async () => {
-        const res = await axios.post('/basedatos/consultatotalpacientes', { numid: documento });
+    const consultarbase = async (id) => {
+        const res = await axios.get(`/basedatos/consultatotalpacientes/${id}`);
         console.log(res.data)
-        setDocumento('')
-        setNombre('')
-        setApellido('')
+        //setDocumento('')
+        setNombre(res.data[0].nombre)
+        setApellido(res.data[0].apellidos)
 
       }
 
     const actualizarbase = async () => {
-        const res = await axios.post('/basedatos/actualizarpacientes', { numid: documento, nombre, apellido });
+        const res = await axios.put('/basedatos/actualizarpacientes', { numid: documento, nombre, apellido });
         console.log(res.data)
         setDocumento('')
         setNombre('')
@@ -69,9 +69,9 @@ export const Registroinfo = () => {
          borrardebase(id)
       }
 
-      const consultar = () => {
+      const consultar = (id) => {
         console.log('Se hizo click para consultar');
-         consultarbase()
+         consultarbase(id)
       }
 
       const actualizar = () => {
@@ -133,7 +133,7 @@ export const Registroinfo = () => {
                 <button
                 className="btn btn-primary" 
                 type="button"
-                onClick={()=>consultar()}
+                onClick={()=>consultar(documento)}
                 > 
                 consultar id
                 </button>

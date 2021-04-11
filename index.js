@@ -18,47 +18,47 @@ const mountRoutes = require('./routers');
 
 mountRoutes(app);
 
-app.get('/consultatotalpacientes', (req, res) => {
-  res.send(pacientes);
-});
+// app.get('/consultatotalpacientes', (req, res) => {
+//   res.send(pacientes);
+// });
 
-app.put('/insertarpacientes', (req, res) => {
-  adicionapaciente(req.body);
-  res.send('GUARDADO OK !!!');
-});
+// app.put('/insertarpacientes', (req, res) => {
+//   adicionapaciente(req.body);
+//   res.send('GUARDADO OK !!!');
+// });
 
-app.delete('/borrarpacientes', (req, res) => {
-  borrapaciente(req.body.id);
-  res.send('BORRADO OK !!!');
-});
+// app.delete('/borrarpacientes', (req, res) => {
+//   borrapaciente(req.body.id);
+//   res.send('BORRADO OK !!!');
+// });
 
-app.post('/actualizarpacientes', (req, res) => {
-  actualizapaciente(req.body);
-  res.send('ACTUALIZADO OK !!!');
-});
+// app.post('/actualizarpacientes', (req, res) => {
+//   actualizapaciente(req.body);
+//   res.send('ACTUALIZADO OK !!!');
+// });
 
-const adicionapaciente = (paciente) => {
-  pacientes.push(paciente);
-  return paciente;
-};
+// const adicionapaciente = (paciente) => {
+//   pacientes.push(paciente);
+//   return paciente;
+// };
 
-const borrapaciente = (id) => {
-  const index = pacientes.findIndex((paciente) => paciente.id === id);
+// const borrapaciente = (id) => {
+//   const index = pacientes.findIndex((paciente) => paciente.id === id);
 
-  if (index !== -1) {
-    return pacientes.splice(index, 1)[0];
-  }
-};
+//   if (index !== -1) {
+//     return pacientes.splice(index, 1)[0];
+//   }
+// };
 
-const actualizapaciente = (newdatospaciente) => {
-  const index = pacientes.findIndex(
-    (paciente) => paciente.id === newdatospaciente.id
-  );
+// const actualizapaciente = (newdatospaciente) => {
+//   const index = pacientes.findIndex(
+//     (paciente) => paciente.id === newdatospaciente.id
+//   );
 
-  if (index !== -1) {
-    return (pacientes[index] = newdatospaciente);
-  }
-};
+//   if (index !== -1) {
+//     return (pacientes[index] = newdatospaciente);
+//   }
+// };
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets
